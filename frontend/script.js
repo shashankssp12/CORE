@@ -24,14 +24,8 @@ form data. */
   formData.set("full_name", full_name);
   formData.delete("first_name");
   formData.delete("last_name");
-  var formDataObject = {};
 
-  // Iterate over FormData entries and populate the formDataObject
-  for (var pair of formData.entries()) {
-    formDataObject[pair[0]] = pair[1];
-  }
 
-  console.log(formDataObject);
   /* The code is making an HTTP POST request to the "/api/person/" endpoint with the specified headers
   and request body. */
   const res = await fetch("http://127.0.0.1:8000/api/patient-registration/", {

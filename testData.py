@@ -17,7 +17,7 @@ def generate_random_date():
 
 def generate_dummy_data():
     dummy_data = []
-    for _ in range(10):
+    for _ in range(1):
         
         data = {
             "cr_number": faker.random_number(digits=6),

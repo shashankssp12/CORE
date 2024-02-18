@@ -21,6 +21,8 @@ import django
 from django.conf import settings
 from testData import *
 from selenium.webdriver.support.ui import Select
+import requests
+
 
 
 class PatientRegistrationTest(TestCase):
@@ -52,17 +54,39 @@ class PatientRegistrationTest(TestCase):
             p_email=selenium.find_element(by=By.NAME , value="p_email")
             
             p_address=selenium.find_element(by=By.NAME , value="p_address") 
-            ecog=Select(selenium.find_element(by=By.NAME , value="ecog") )
-            comborbidity=Select(selenium.find_element(by=By.NAME , value="comorbidity"))
-            p_id_type=Select(selenium.find_element(by=By.NAME , value="p_id_type") )
-            p_id_no=selenium.find_element(by=By.NAME , value="p_id_no")
-            relative_name=selenium.find_element(by=By.NAME , value="relative_name") 
-            p_relationship=Select(selenium.find_element(by=By.NAME , value="p_relationship") )
-            smoking_duration=Select(selenium.find_element(by=By.NAME , value="smoking_duration"))
-            tobacco_use=Select(selenium.find_element(by=By.NAME , value="tobacco_use"))
-            alcohol_use=Select(selenium.find_element(by=By.NAME , value="alcohol_use"))
+            time.sleep(0.5)
             
-            notes=selenium.find_element(by=By.NAME, value="notes")
+            Select(selenium.find_element(by=By.NAME , value="ecog") ).select_by_visible_text(i['ecog'])
+            time.sleep(0.5)
+            
+            Select(selenium.find_element(by=By.NAME , value="comborbidity")).select_by_visible_text(i['comborbidity'])
+            time.sleep(0.5)
+            
+            Select(selenium.find_element(by=By.NAME , value="p_id_type") ).select_by_visible_text(i['p_id_type'])
+            time.sleep(0.5)
+            
+            selenium.find_element(by=By.NAME , value="p_id_no").send_keys(i['p_id_no'])
+            time.sleep(0.5)
+            
+            selenium.find_element(by=By.NAME , value="relative_name").send_keys(i['relative_name'])
+            time.sleep(0.5)
+            
+            Select(selenium.find_element(by=By.NAME , value="p_relationship") ).select_by_visible_text(i['p_relationship'])
+            time.sleep(0.5)
+            
+            Select(selenium.find_element(by=By.NAME , value="smoking_duration")).select_by_visible_text(i['smoking_duration'])
+            time.sleep(0.5)
+            
+            Select(selenium.find_element(by=By.NAME , value="tobacco_use")).select_by_visible_text(i['tobacco_use'])
+            time.sleep(0.5)
+
+            Select(selenium.find_element(by=By.NAME , value="alcohol_use")).select_by_visible_text(i['alcohol_use'])
+            time.sleep(0.5)
+
+            
+            selenium.find_element(by=By.NAME, value="notes").send_keys(i['notes'])
+            time.sleep(0.5)
+
             submit=selenium.find_element(by=By.ID, value="save")
              
             # SENDING DATA TO ALL SELECTED FIELDS
@@ -80,24 +104,27 @@ class PatientRegistrationTest(TestCase):
             p_height.send_keys(i['p_height'])
             p_weight.send_keys(i['p_weight'])
             phone_number.send_keys(i['phone_number'])
-            p_email.send_keys(i['p_email'])
+            p_email.send_keys(f'test+{i['p_email']}')
             p_address.send_keys(i['p_address'])
             
-            ecog.select_by_visible_text(i['ecog'])
+            # ecog.select_by_visible_text(i['ecog'])
             
-            comborbidity.select_by_visible_text(i['comborbidity'])
-            p_id_type.select_by_visible_text(i['p_id_type'])
-            p_id_no.send_keys(i['p_id_no'])
-            relative_name.send_keys(i['relative_name'])
-            p_relationship.select_by_visible_text(i['p_relationship'])
-            smoking_duration.select_by_visible_text(i['smoking_duration'])
-            tobacco_use.select_by_visible_text(i['tobacco_use'])
-            alcohol_use.select_by_visible_text(i['alcohol_use'])
-            notes.send_keys(i['notes'])
+            # comborbidity.select_by_visible_text(i['comborbidity'])
+            # p_id_type.select_by_visible_text(i['p_id_type'])
+            # p_id_no.send_keys(i['p_id_no'])
+            # relative_name.send_keys(i['relative_name'])
+            # p_relationship.select_by_visible_text(i['p_relationship'])
+            # smoking_duration.select_by_visible_text(i['smoking_duration'])
+            # tobacco_use.select_by_visible_text(i['tobacco_use'])
+            # alcohol_use.select_by_visible_text(i['alcohol_use'])
+            # notes.send_keys(i['notes'])
         
             submit.send_keys(Keys.RETURN)
-            time.sleep(15)
-            
+            time.sleep(5)
+        
+        
+        requests.delete("http://localhost:8000/api/patient-registration/?test=True")
+
         
         selenium.quit()
 

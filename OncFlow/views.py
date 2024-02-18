@@ -27,7 +27,17 @@ def patient_register(request):
                status=status.HTTP_200_CREATED)
          return Response(serializer.errors) 
    elif request.method ==  'DELETE':
-      Patient_Data.objects.all().delete()
-      return Response({"message" : "Person's data is Deleted"})
+      objs=Patient_Data.objects.all()
+
+      # extracting the query from api request URL
+      test= request.GET.get('test')
+      if test == "True":
+          objs.filter(p_email__icontains="test").delete()         
+          return Response({"message" : "Person'test  data is Deleted"})
+      
+      objs.delete()
+      return Response({"message" : "Person data is Deleted"})
+          
+      
    
     
