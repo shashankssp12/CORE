@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+
+    <form method="POST"
+        class="flex rounded-lg items-center justify-center w-3/4 max-w-sm h-1/4 space-y-3 md:flex-row md:w-full md:space-x-3 md:space-y-0">
+        <div class=" relative ">
+            <input type="text" id="crnumber"
+                class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+                placeholder="CR No" />
+        </div>
+        <button
+            class="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-red-600 rounded-lg shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-red-200"
+            type="submit">
+            Submit
+        </button>
+    </form>
+
+</body>
+<script>
+    let crnumber = document.getElementById('crnumber')
+    let form = document.getElementsByTagName("form")[0];
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        crnumber = crnumber.value;
+        window.location.href = "/frontend/patient-registration.html?crn=" + crnumber;
+
+    })
+</script>
+
+</html>
